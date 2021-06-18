@@ -1,6 +1,8 @@
 package com.sat.processosat.resources;
 
 import java.net.URI;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.sat.processosat.services.UserService;
 import com.sat.processosat.domain.User;
+import com.sat.processosat.services.UserService;
 
 @RestController
 @RequestMapping(value="/users")
@@ -25,6 +27,12 @@ public class UserResource {
 		User obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<User>> findAll() {
+		List<User> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
